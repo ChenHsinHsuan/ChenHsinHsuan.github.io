@@ -1,0 +1,716 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,spring,Web,framework,名詞定義,springBean,JavaBean,POJO," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="OverviewspringBean  JavaBean  POJO 定義說明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springBean, JavaBean, POJO 定義">
+<meta property="og:url" content="http://chenhsinhsuan.github.io/2015/10/12/SpringFramework_Bean&JavaBean&POJO/index.html">
+<meta property="og:site_name" content="println("This is Aircon Station")">
+<meta property="og:description" content="OverviewspringBean  JavaBean  POJO 定義說明">
+<meta property="og:updated_time" content="2015-10-13T03:24:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springBean, JavaBean, POJO 定義">
+<meta name="twitter:description" content="OverviewspringBean  JavaBean  POJO 定義說明">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> springBean, JavaBean, POJO 定義 | println("This is Aircon Station") </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">println("This is Aircon Station")</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                springBean, JavaBean, POJO 定義
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2015-10-12T15:33:35+08:00" content="2015-10-12">
+              2015-10-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Java/framwork/" itemprop="url" rel="index">
+                    <span itemprop="name">framwork</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Java/framwork/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Java/framwork/spring/名詞定義/" itemprop="url" rel="index">
+                    <span itemprop="name">名詞定義</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Overview">Overview</h2><p>springBean  JavaBean  POJO 定義說明</p>
+<a id="more"></a>
+<h2 id="Spring_Bean">Spring Bean</h2><blockquote>
+<p>A Spring bean is basically an object managed by Spring.<br>More specifically, it is an object that is instantiated, configured and otherwise managed by a Spring Framework container.</p>
+</blockquote>
+<p>在Spring中，Bean是一個物件，藉由Spring IoC Container來初始化(instantiated)、管理組裝(assembled)。</p>
+<p>我的理解是他是spring new 出來的物件</p>
+<p>一個典型Bean 的.xml設定檔如下所示：</p>
+<pre><code><span class="tag">&lt;<span class="title">beans</span> <span class="attribute">xmlns</span>=<span class="value">"http://www.springframework.org/schema/beans"</span>
+<span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span>
+<span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"</span>&gt;</span>
+   <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"helloWorld"</span> <span class="attribute">class</span>=<span class="value">"HelloWorld"</span> <span class="attribute">destroy-method</span>=<span class="value">"destroy"</span> <span class="attribute">init-method</span>=<span class="value">"init"</span>&gt;</span>
+       <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"message"</span> <span class="attribute">value</span>=<span class="value">"Hello World!"</span>/&gt;</span>
+   <span class="tag">&lt;/<span class="title">bean</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">beans</span>&gt;</span>
+</code></pre><h2 id="JavaBean">JavaBean</h2><blockquote>
+<ul>
+<li><p>Have a public default (no argument) constructor</p>
+</li>
+<li><p>allows access to properties using accessor (getter &amp; setter) methods</p>
+</li>
+<li><p>Implement java.io.Serializable</p>
+</li>
+</ul>
+</blockquote>
+<p>標準的Java Beans必須符合以下條件:</p>
+<ol>
+<li>為一個 public 類別</li>
+<li>實作 java.io.Serializable 介面 </li>
+<li>必須有一個沒有傳入參數的建構子</li>
+<li>Properties 均有一對 getter &amp; setter method</li>
+</ol>
+<p>example:</p>
+<pre><code><span class="comment">//1.為一個 public 類別</span>
+<span class="comment">//2.實作 java.io.Serializable 介面 </span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>{
+    <span class="keyword">private</span> String name;
+    <span class="keyword">private</span> Integer age;
+
+    <span class="comment">//3.必須有一個沒有傳入參數的建構子</span>
+    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span></span>{
+
+    }
+
+    <span class="comment">//4.Properties 均有一對 getter &amp; setter method</span>
+    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>{
+        <span class="keyword">return</span> <span class="keyword">this</span>.name;
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>{
+        <span class="keyword">this</span>.name = name;
+    }
+
+    <span class="function"><span class="keyword">public</span> Integer <span class="title">getAge</span><span class="params">()</span></span>{
+        <span class="keyword">return</span> <span class="keyword">this</span>.age;
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span></span>{
+        <span class="keyword">this</span>.age = age;
+    }
+}
+</code></pre><h2 id="Plan_Old_Java_Project（POJO）">Plan Old Java Project（POJO）</h2><p>POJO是一個正規的Java物件(不是JavaBean、EntityBean等)，也不擔當任何的特殊的角色，</p>
+<p>也不實現任何Java框架指定的接口。 </p>
+<p>所以POJO與JavaBean是不同的，因為POJO它不可依賴於framework的繼承或interface實作。 </p>
+<p>與JavaBeans<strong>不同</strong>的是:POJO包含業務邏輯處理和持久化邏輯；</p>
+<p>與JavaBeans<strong>相同</strong>的是:可以包含屬性的set和get方法。</p>
+<p>example:</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MyBean</span> {
+
+    <span class="keyword">private</span> String someProperty;
+
+    <span class="function"><span class="keyword">public</span> String <span class="title">getSomeProperty</span>(<span class="params"></span>) </span>{
+         <span class="keyword">return</span> someProperty;
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSomeProperty</span>(<span class="params">String someProperty</span>) </span>{
+        <span class="keyword">this</span>.someProperty = someProperty;
+    }
+}
+</code></pre>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/spring/" rel="tag">#spring</a>
+          
+            <a href="/tags/Web/" rel="tag">#Web</a>
+          
+            <a href="/tags/framework/" rel="tag">#framework</a>
+          
+            <a href="/tags/名詞定義/" rel="tag">#名詞定義</a>
+          
+            <a href="/tags/springBean/" rel="tag">#springBean</a>
+          
+            <a href="/tags/JavaBean/" rel="tag">#JavaBean</a>
+          
+            <a href="/tags/POJO/" rel="tag">#POJO</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/12/SpringFramework_AOP/" rel="next" title="Aspect-oriented programming(AOP)">
+                <i class="fa fa-chevron-left"></i> Aspect-oriented programming(AOP)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/12/SpringFramework_DI/" rel="prev" title="Dependency Injection(DI)">
+                Dependency Injection(DI) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/myPhoto.jpg"
+               alt="Aircon Chen" />
+          <p class="site-author-name" itemprop="name">Aircon Chen</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring_Bean"><span class="nav-number">2.</span> <span class="nav-text">Spring Bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaBean"><span class="nav-number">3.</span> <span class="nav-text">JavaBean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plan_Old_Java_Project（POJO）"><span class="nav-number">4.</span> <span class="nav-text">Plan Old Java Project（POJO）</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aircon Chen</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

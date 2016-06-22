@@ -1,0 +1,774 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,spring,Web,framework,名詞定義,DI," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="OverviewSpring 所採用的是Dependency Injection 來實現 IoC
+
+保留抽象介面，讓組件依賴於抽象介面，當組件要與其它實際的物件發生依賴關係時，透過抽象介面來注入依賴的實際物件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dependency Injection(DI)">
+<meta property="og:url" content="http://chenhsinhsuan.github.io/2015/10/12/SpringFramework_DI/index.html">
+<meta property="og:site_name" content="println("This is Aircon Station")">
+<meta property="og:description" content="OverviewSpring 所採用的是Dependency Injection 來實現 IoC
+
+保留抽象介面，讓組件依賴於抽象介面，當組件要與其它實際的物件發生依賴關係時，透過抽象介面來注入依賴的實際物件。">
+<meta property="og:updated_time" content="2015-10-15T01:11:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dependency Injection(DI)">
+<meta name="twitter:description" content="OverviewSpring 所採用的是Dependency Injection 來實現 IoC
+
+保留抽象介面，讓組件依賴於抽象介面，當組件要與其它實際的物件發生依賴關係時，透過抽象介面來注入依賴的實際物件。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Dependency Injection(DI) | println("This is Aircon Station") </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">println("This is Aircon Station")</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Dependency Injection(DI)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2015-10-12T15:34:35+08:00" content="2015-10-12">
+              2015-10-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Java/framwork/" itemprop="url" rel="index">
+                    <span itemprop="name">framwork</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Java/framwork/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Java/framwork/spring/名詞定義/" itemprop="url" rel="index">
+                    <span itemprop="name">名詞定義</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Overview">Overview</h2><p>Spring 所採用的是Dependency Injection 來實現 IoC</p>
+<blockquote>
+<p><strong>保留抽象介面，讓組件依賴於抽象介面，當組件要與其它實際的物件發生依賴關係時，透過抽象介面來注入依賴的實際物件。</strong></p>
+</blockquote>
+<a id="more"></a>
+<p>example:</p>
+<pre><code><span class="function"><span class="keyword">void</span> <span class="title">saveNotice</span><span class="params">()</span> </span>{ 
+
+    saveAInquery() 
+
+}
+</code></pre><p>對於上面這段程式碼:saveNotice()就是所謂的高層模組,相對的saveInquery()就是所謂的低層模組</p>
+<p>saveNotice()這個方法必須依賴於 saveInquery(),</p>
+<p>如果今天我們想要存的是一張訂單,那麼這支程式就沒辦法重複使用了,</p>
+<p>從上面這個例子我們發現</p>
+<p>低層模組saveAInquery()的變動, 使高層模組saveNotice()也必須跟著更動，這不是一個好的設計方式</p>
+<blockquote>
+<p><strong>在設計上希望模組都依賴於模組的抽象，這樣才可以重用高層的業務設計</strong></p>
+</blockquote>
+<p>若改寫成：</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BO</span> { 
+
+    <span class="keyword">private</span> InqueryWriter writer = <span class="keyword">new</span> InqueryWriter(); 
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveNotice</span>(<span class="params"></span>) </span>{ 
+
+        writer.save(); 
+
+    } 
+}
+</code></pre><p>BusinessObject的存檔對象決定權在於writer是誰,</p>
+<p>但是這樣寫程式仍然沒辦法重複使用,</p>
+<p>如果透過interface的宣告就可以有效改變這樣的局面</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">NoticeWriter</span> { 
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span>(<span class="params"></span>)</span>; 
+} 
+
+
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BO</span> { 
+    <span class="keyword">private</span> NoticeWriter writer; 
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDeviceWriter</span>(<span class="params">NoticeWriter writer</span>) </span>{ 
+        <span class="keyword">this</span>.writer = writer; 
+    } 
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveNotice</span>(<span class="params"></span>) </span>{ 
+        writer.save(); 
+    } 
+}
+</code></pre><p>這樣一來，BusinessObject 就是可重用的，如果今天有存儲至 Inquery 或 Order 的需求時，只要實作 NoticeWriter 即可，而不用修改 BusinessObject</p>
+<p>而真正的實作如下</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">InqueryWriter</span> <span class="title">implement</span> <span class="title">NoticeWriter</span> { 
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span>(<span class="params"></span>) </span>{ 
+        .... 
+        <span class="comment">// 實際儲存至Inquery的程式碼 </span>
+    } 
+} 
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">OrderWriter</span> <span class="title">implement</span> <span class="title">NoticeWriter</span> { 
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span>(<span class="params"></span>) </span>{ 
+        .... 
+        <span class="comment">// 實際儲存至Order的程式碼 </span>
+    } 
+}
+</code></pre><p>injection又有3種區別:<br><a href="http://www.martinfowler.com/articles/injection.html" target="_blank" rel="external">Martin Fowler的文章</a>中談到了三種實現方式</p>
+<ol>
+<li>Interface injection (Type 1 IoC)</li>
+<li>Setter injection (Type 2 IoC)</li>
+<li>Constructor injection (Type 3 IoC)</li>
+</ol>
+<h3 id="Interface_injection_(Type_1_IoC)">Interface injection (Type 1 IoC)</h3><p>使用Type 1 IoC時會要求實作介面，這個介面是為容器所用的，</p>
+<p>容器知道介面上所規定的方法，它可以呼叫實作介面的物件來完成依賴關係的注入，例如:</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">BO</span> { 
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createDependency</span>(<span class="params">Map dependObjects</span>)</span>; 
+} 
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BOImpl</span> <span class="title">implement</span> <span class="title">BO</span> { 
+    <span class="keyword">private</span> BidBO bidBO; 
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createDependency</span>(<span class="params">Map dependObjects</span>)</span>{
+        <span class="keyword">this</span>.bidBO = dependObjects; 
+        <span class="comment">// 在這邊實現與BOImpl的依賴關係 </span>
+        ...... 
+    } 
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendInquery</span>(<span class="params"></span>) </span>{  
+        ...... 
+        bidBO.saveAInquery(); 
+    } 
+} 
+</code></pre><p>Type 1 IoC要求BO實現特定的介面，這就使得BusinessObject依賴於容器，</p>
+<p>如果日後BO要脫離 Spring Container，就必須修改程式，</p>
+<p>想想在更複雜的依賴關係中產生更多複雜的介面，</p>
+<p>組件與容器（框架）的依賴會更加複雜，最後使得組件無法從容器中脫離。 </p>
+<p><strong>所以Type 1 IoC具有強的侵入性，使用它來實現依賴注入會使得組件相依於容器（框架），降低組件的重用性。</strong></p>
+<h3 id="Setter_injection_(Type_2_IoC)">Setter injection (Type 2 IoC)</h3><pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BO</span> { 
+
+    <span class="keyword">private</span> NoticeWriter writer; 
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDeviceWriter</span>(<span class="params">NoticeWriter writer</span>) </span>{ 
+        <span class="keyword">this</span>.writer = writer; 
+    } 
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveNotice</span>(<span class="params"></span>) </span>{ 
+        writer.save(); 
+    } 
+}
+</code></pre><p>上方這樣的寫法就是 Type 2 的 IoC, Setter injection</p>
+<p>也<strong>是spring最鼓勵的injection的方式</strong></p>
+<h3 id="Constructor_injection_(Type_3_IoC)">Constructor injection (Type 3 IoC)</h3><pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BO</span> { 
+    <span class="keyword">private</span> NoticeWriter writer; 
+
+    <span class="function"><span class="keyword">public</span> <span class="title">BusinessObject</span>(<span class="params">NoticeWriter writer</span>) </span>{ 
+        <span class="keyword">this</span>.writer = writer; 
+    } 
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span>(<span class="params"></span>) </span>{ 
+        writer.save(); 
+    } 
+} 
+</code></pre><p>使用 Constructor 的好處是：可以在new物件的同時一併完成依賴關係的建立，</p>
+<p>但是如果要建立的物件關係很多，則會在Constructor上留下一長串的參數，</p>
+<p>這時使用 Setter 會是個不錯的選擇，</p>
+<p>另一方面，Setter 可以有明確的名稱可以瞭解注入的物件會是什麼，</p>
+<p>像是set<strong>XXX</strong>()這樣的名稱會比Constructor上用參數位置代表某個物件來得好。</p>
+<p>官方的說法是</p>
+<p>setter的注入缺點是無法明確表示哪些屬性是必須注入的,哪些是選擇性的注入</p>
+<p>constructor的注入方式反而可以有效解決這樣的問題，如果參數於xml檔填寫的不完整，就無法使用該bean</p>
+<p>Dependency Injection 結論就是</p>
+<blockquote>
+<h3 id="程式不依賴於實作，而是程式與實作都要依賴於抽象"><strong>程式不依賴於實作，而是程式與實作都要依賴於抽象</strong></h3></blockquote>
+<h2 id="Reference">Reference</h2><ol>
+<li><a href="http://www.objectmentor.com/resources/articles/dip.pdf" target="_blank" rel="external">The Dependency Inversion Principle</a></li>
+<li><a href="http://openhome.cc/Gossip/SpringGossip/DI.html" target="_blank" rel="external">Dependency Injection</a></li>
+</ol>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/spring/" rel="tag">#spring</a>
+          
+            <a href="/tags/Web/" rel="tag">#Web</a>
+          
+            <a href="/tags/framework/" rel="tag">#framework</a>
+          
+            <a href="/tags/名詞定義/" rel="tag">#名詞定義</a>
+          
+            <a href="/tags/DI/" rel="tag">#DI</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/12/SpringFramework_Bean&JavaBean&POJO/" rel="next" title="springBean, JavaBean, POJO 定義">
+                <i class="fa fa-chevron-left"></i> springBean, JavaBean, POJO 定義
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/12/SpringFramework_IoC/" rel="prev" title="Inversion of Control(IoC)">
+                Inversion of Control(IoC) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/myPhoto.jpg"
+               alt="Aircon Chen" />
+          <p class="site-author-name" itemprop="name">Aircon Chen</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Interface_injection_(Type_1_IoC)"><span class="nav-number">1.1.</span> <span class="nav-text">Interface injection (Type 1 IoC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setter_injection_(Type_2_IoC)"><span class="nav-number">1.2.</span> <span class="nav-text">Setter injection (Type 2 IoC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Constructor_injection_(Type_3_IoC)"><span class="nav-number">1.3.</span> <span class="nav-text">Constructor injection (Type 3 IoC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程式不依賴於實作，而是程式與實作都要依賴於抽象"><span class="nav-number">1.4.</span> <span class="nav-text">程式不依賴於實作，而是程式與實作都要依賴於抽象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aircon Chen</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
